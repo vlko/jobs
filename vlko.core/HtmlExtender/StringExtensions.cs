@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using vlko.core.Tools;
 
 namespace vlko.core.HtmlExtender
@@ -25,7 +26,7 @@ namespace vlko.core.HtmlExtender
 		{
 			if (!string.IsNullOrEmpty(source))
 			{
-				source = source.Replace("\n", "<br/>");
+				source = HttpUtility.HtmlEncode(source).Replace("\n", "<br/>");
 			}
 			return MvcHtmlString.Create(source);
 		}

@@ -69,6 +69,7 @@
 			event.preventDefault();
 			var count = $("#properties .data").length;
 			$("#properties .add_new").before($(newRowTemplate.replace(/%num%/gi, count)));
+			$("#properties .data:last input:eq(1)").focus();
 		});
 		$("#properties").delegate(".remove_property", "click", function (event) {
 			event.preventDefault();
