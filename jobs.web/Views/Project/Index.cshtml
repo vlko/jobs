@@ -1,0 +1,50 @@
+﻿@model vlko.core.Components.PagedModel<Jobs.Data.Root.Job>
+
+@{
+	ViewBag.Title = "Index";
+	Html.ScriptInclude("~/Scripts/Grid.js");
+}
+
+<h2>Zoznam projektov</h2>
+
+<div>
+	@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Create(), "Create new", new { @class = "grid_create", title = "Create new" }))
+</div>
+<table>
+	<tr>
+		<th></th>
+		<th>
+			Nadpis
+		</th>
+		<th>
+			Miesto
+		</th>
+		<th>
+			Technológie
+		</th>
+		<th>
+			Pridané
+		</th>
+	</tr>
+
+@foreach (var item in Model) {
+	<tr>
+		<td>
+			@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(item.SimpleId), "Details", new { @class = "grid_details", title = "Details" }))
+		</td>
+		<td>@item.Title</td>
+		<td>@item.Place</td>
+		<td>@item.Prerequirements</td>
+		<td>@String.Format("{0:g}", item.CreateDate)</td>
+	</tr>
+}
+</table>
+<div>@Html.Partial("~/Views/Shared/Pager.cshtml", new vlko.core.Components.PagerModel(Model, "Index"))</div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$("#content").ajaxGrid();
+	});
+</script>);
+}
+

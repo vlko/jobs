@@ -1,0 +1,21 @@
+﻿@{
+	ViewBag.Title = "ConfirmSent";
+}
+
+<h2>Potvrdzovací email odoslaný</h2>
+<p>
+Na Vami zadaný email bol odoslaný email s linkou, po kliknutí na ktorú bude vaša ponuka zverejnená.
+</p>
+<div class="ajax_ignore">
+	@Html.ActionLink("Späť na zoznam projektov", "Index") 
+</div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$(".buttons").each(function () {
+			$("button:first", this).hide();
+		});
+	});
+</script>);
+}
+

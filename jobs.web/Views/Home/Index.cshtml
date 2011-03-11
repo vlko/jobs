@@ -1,0 +1,40 @@
+﻿@model jobs.web.ViewModel.Home.HomeViewModel
+@using vlko.BlogModule.Action.ViewModel;
+@{
+	ViewBag.Title = "Home Page";
+	Html.ScriptInclude("~/Scripts/Grid.js");
+}
+<section id="people">
+	<h2>Záujemci</h2>
+	<h3>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Create(), "Nový záujemca", new { @class = "grid_create" }))</h3>
+	@foreach (var offer in Model.People)
+	 {
+		<article>
+			<h3>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(offer.SimpleId), offer.Title, new { @class = "grid_details" }))</h3>
+			<div class="place">@offer.Place</div>
+			<div class="skill">@offer.Prerequirements</div>
+		</article>	 
+	 }
+	 @(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Index(null), "Zoznam všetkých záujemcov"))
+</section>
+<section id="projects">
+	<h2>Projekty</h2>
+	<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Create(), "Nový projekt", new { @class = "grid_create" }))</h3>
+	@foreach (var offer in Model.Projects)
+	 {
+		<article>
+			<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(offer.SimpleId), offer.Title, new { @class = "grid_details" }))</h3>
+			<div class="place">@offer.Place</div>
+			<div class="technology">@offer.Prerequirements</div>
+		</article>	 
+	 }
+	 @(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Index(null), "Zoznam všetkých projektov"))
+</section>
+<div class="cleaner"></div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$("#content").ajaxGrid({ showText: true });
+	});
+</script>);
+}

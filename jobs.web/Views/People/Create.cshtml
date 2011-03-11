@@ -1,0 +1,88 @@
+﻿@model Jobs.Data.Root.Job
+
+@{
+	ViewBag.Title = "New";
+
+	Html.ScriptInclude("~/Scripts/jquery.validate.js");
+	Html.ScriptInclude("~/Scripts/jquery.validate.unobtrusive.js");
+}
+
+<h2>Nový záujemca</h2>
+
+@using (Html.BeginForm()) {
+	@Html.ValidationSummary(excludePropertyErrors:true)
+	<fieldset>
+		<legend>Údaje</legend>
+
+			@Html.EditorFor(model => model.Title)
+			@Html.EditorFor(model => model.Email)
+			@Html.EditorFor(model => model.Place)
+			<div class="editor-label">
+				<label for="@Html.NameFor(model => model.Prerequirements)">Skúsenosti</label>
+			</div>
+			<div class="editor-field">
+				@Html.TextBoxFor(model => model.Prerequirements, cssClass: "text-box single-line", maxLength: Html.MaxLength(model => model.Prerequirements))
+				@Html.ValidationMessageFor(model => model.Prerequirements)
+			</div>
+			
+			<div class="editor-label">
+				Vlastnosti
+			</div>
+			<div class="editor-field">
+				<table id="properties">
+					<thead><th class="ignore"></th><th>Názov</th><th>Hodnota</th></thead>
+					@for (int i = 0; i < Model.Properties.Length; i++)
+					{
+					<text>@{ var property = Model.Properties[i]; }</text>
+					<tr class="data">
+						<td><input type="submit" class="remove_property" name="RemoveProperty_@(i.ToString())" value="Zmaž" /></td>
+						<td>@Html.TextBox("Properties[" + i +"].Key", property.Key)</td>
+						<td>@Html.TextBox("Properties[" + i + "].Value", property.Value)</td>
+					</tr>
+					}
+					<tr class="add_new">
+						<td colspan="3"><input type="submit" id="add_property" name="AddProperty" value="Nová" /></td>
+					</tr>
+				</table>
+			</div>
+
+			@Html.EditorFor(model => model.Description)
+		<div class="ajax_ignore">
+			<input type="submit" value="Create" />
+		</div>
+	</fieldset>
+}
+<div class="ajax_ignore">
+	@Html.ActionLink("Späť na zoznam záujemcov", "Index") 
+</div>
+
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		@{ var templateProperty = new Jobs.Data.Root.Includes.PropertyInfo(); }
+		var newRowTemplate = '<tr class="data">'
+								+ '<td><input type="submit" class="remove_property" name="RemoveProperty_%num%" value="Zmaž" /></td>'
+								+ '<td>@Html.TextBox("Properties[%num%].Key", templateProperty.Key)</td>'
+								+ '<td>@Html.TextBox("Properties[%num%].Value", templateProperty.Value)</td>'
+							+ '</tr>';
+		$("#add_property").click(function (event) {
+			event.preventDefault();
+			var count = $("#properties .data").length;
+			$("#properties .add_new").before($(newRowTemplate.replace(/%num%/gi, count)));
+		});
+		$("#properties").delegate(".remove_property", "click", function (event) {
+			event.preventDefault();
+			var parentRow = $(this).parents(".data");
+			parentRow.nextAll(".data").each(function() {
+				var key = $("input[name$=.Key]", this);
+				var value = $("input[name$=.Value]", this);
+				var index = parseInt(key.attr("name").match(/\[(\d+)\]/i)[1]) - 1;
+				key.attr("name", "Properties[" + index + "].Key");
+				value.attr("name", "Properties[" + index + "].Value");
+			});
+			parentRow.remove();
+		});
+	});
+</script>);
+}
+

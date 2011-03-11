@@ -1,0 +1,25 @@
+﻿@model jobs.web.ViewModel.Contact.ContactModel
+
+@{
+	ViewBag.Title = "Contact mail";
+	Func<string, object> formatProperty = (value) =>
+	{
+		if (value.StartsWith("http://") || value.StartsWith("https://"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"{0}\">{0}</a>", value));
+		}
+		if (value.StartsWith("@"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"http://twitter.com/{1}\">{0}</a>", value, value.Substring(1)));
+		}
+		return value;
+	};
+	var offerLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/People/" + Model.JobId;
+}
+
+<email>
+@Model.Email reagoval na Vašu ponuku <a href="@offerLink">@offerLink</a>
+<p>
+@Html.LineBreaksToBr(Model.Text)
+</p>
+</email>

@@ -1,0 +1,46 @@
+﻿@model Jobs.Data.Root.Job
+
+@{
+	ViewBag.Title = "SendMail";
+	Func<string, object> formatProperty = (value) =>
+	{
+		if (value.StartsWith("http://") || value.StartsWith("https://"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"{0}\">{0}</a>", value));
+		}
+		if (value.StartsWith("@"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"http://twitter.com/{1}\">{0}</a>", value, value.Substring(1)));
+		}
+		return value;
+	};
+	var validationLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/Project/Confirm/" + Model.ActivationToken;
+}
+
+<email>
+Pre zverejnenie ponuky kliknite na nasledujúcu linku  <a href="@validationLink">@validationLink</a>
+<table>
+	<tr><td colspan="2">Detail ponuky</td></tr>
+	<tr><td>Nadpis</td>
+	<td>@Model.Title</td></tr>
+
+	<tr><td>Miesto</td>
+	<td>@Model.Place</td></tr>
+
+	<tr><td>Technológia</td>
+	<td>@Model.Prerequirements</td></tr>
+
+
+	@foreach (var property in Model.Properties)
+	{
+		<tr><td>@property.Key</td>
+		<td>@formatProperty(property.Value)</td></tr>
+	 }
+
+	<tr><td>Popis</td>
+	<td>@Html.LineBreaksToBr(Model.Description)</td></tr>
+
+	<tr><td>Vytvorené</td>
+	<td>@String.Format("{0:g}", Model.CreateDate)</v>
+</table>
+</email>

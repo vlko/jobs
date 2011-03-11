@@ -1,0 +1,57 @@
+﻿@model jobs.web.ViewModel.Contact.ContactModel
+
+@{
+	ViewBag.Title = "Contact";
+	Html.ScriptInclude("~/Scripts/jquery.validate.js");
+	Html.ScriptInclude("~/Scripts/jquery.validate.unobtrusive.js");
+}
+<div id="contact">
+	<h2>Kontaktný email</h2>
+
+	@using (Html.BeginForm()) {
+		@Html.ValidationSummary(excludePropertyErrors: true)
+		<fieldset>
+			<legend>Pošlite kontaktný email</legend>
+
+			@Html.HiddenFor(model => model.JobId)
+
+			@Html.EditorFor(model => model.Email)
+			@Html.EditorFor(model => model.Text)
+			<p>
+				<input type="submit" value="Odoslať" />
+			</p>
+		</fieldset>
+	}
+
+	<div class="ajax_ignore">
+		@Html.ActionLink("Späť na zoznam projektov", "Index") 
+	</div>
+</div>
+
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$("#contact form")
+				.submit(function () {
+					var form = $(this);
+					if (form.valid()) {
+						createLoading();
+						$.ajax({
+							url: form.attr("action") + "?ajaxTime=" + new Date().getTime(),
+							type: "POST",
+							data: form.serialize(),
+							success: function (data) {
+									var content = $("#contact");
+									fillContentWithData(content, data);
+									closeLoading();
+									updateEffect(content);
+							},
+							error: ajaxException
+						});
+					}
+					return false;
+				}); ;
+	});
+</script>);
+} 
+

@@ -1,0 +1,20 @@
+﻿@{
+	ViewBag.Title = "ConfirmFail";
+}
+
+<h2>Potvrdzovací email NEBOL odoslaný</h2>
+<p>
+Čo si budeme klamať, niečo sa pokašľalo a potvrdzovací email nebol odoslaný. Teraz už len zostáva informovať dobrého admina, ktorý potvrdí ponuku manuálne.
+</p>
+<div class="ajax_ignore">
+	@Html.ActionLink("Späť na zoznam projektov", "Index") 
+</div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$(".buttons").each(function() {
+			$("button:first", this).hide();
+		});
+	});
+</script>);
+}

@@ -1,0 +1,67 @@
+﻿@model Jobs.Data.Root.Job
+
+@{
+	ViewBag.Title = "Details";
+	Func<string, object> formatProperty = (value) =>
+	{
+		if (value.StartsWith("http://") || value.StartsWith("https://"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"{0}\">{0}</a>", value));
+		}
+		if (value.StartsWith("@"))
+		{
+			return new MvcHtmlString(string.Format("<a href=\"http://twitter.com/{1}\">{0}</a>", value, value.Substring(1)));
+		}
+		return value;
+	};
+}
+<div id="detail">
+<h2>Detaily projektu</h2>
+	<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Contact(Model.SimpleId), "Kontaktujte ma", new { @class = "contact_me", title = "Kontaktujte ma" }))</h3>
+	<fieldset>
+		<legend>@Model.Title</legend>
+
+		<div class="display-label">Miesto</div>
+		<div class="display-field">@Model.Place</div>
+
+		<div class="display-label">Technológie</div>
+		<div class="display-field">@Model.Prerequirements</div>
+
+		@foreach (var property in Model.Properties)
+	 {
+			<div class="display-label">@property.Key</div>
+			<div class="display-field">@formatProperty(property.Value)</div>
+	 }
+
+		<div class="display-label">Popis</div>
+		<div class="display-field">@Html.LineBreaksToBr(Model.Description)</div>
+
+		<div class="display-label">Vytvorené</div>
+		<div class="display-field">@String.Format("{0:g}", Model.CreateDate)</div>
+	</fieldset>
+	<div class="ajax_ignore">
+		@Html.ActionLink("Späť na zoznam projektov", "Index") 
+	</div>
+</div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$(".contact_me")
+				.click(function (event) {
+					event.preventDefault();
+					createLoading();
+					$.ajax({
+						url: $(this).attr("href") + "?ajaxTime=" + new Date().getTime(),
+						success: function (data) {
+							var content = $("#detail");
+							fillContentWithData(content, data);
+							closeLoading();
+							updateEffect(content);
+						},
+						error: ajaxException
+					});
+				}); ;
+	});
+</script>);
+} 
+
