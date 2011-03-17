@@ -1,8 +1,14 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+
 <head>
-	<title>vlko - @ViewBag.Title</title>
-	<meta name="description" content="vlko - one coder of many">
+	<title>Startupcamp.sk - Job board</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="http://www.startupcamp.sk/wp-content/themes/startupcamp/style.css" type="text/css" />
+	<link rel="shortcut icon" href="http://startupcamp.sk/favicon.ico" />
+	<link rel='index' title='Startupcamp.sk' href='http://www.startupcamp.sk' />
 	<meta name="author" content="twitter:@@vlkodotnet">
 	@{ 
 		Html.CssInclude("~/Content/Site.css");
@@ -17,48 +23,39 @@
 	<![endif]-->
 	@Html.RenderCss()
 </head>
-
 <body>
-	<div class="page">
-		<div id="header">
-			<img id="logo" src="@Url.Content("~/Content/images/vlko-logo.gif")" alt="logo" />
-			<div id="title">
-				<h1><span class="name">jobs.preweb.sk</span> - to youuuuu</h1>
-			</div>
-			<div id="logindisplay">
-				@Html.Partial("LogOnUserControl")
-			</div>
-			@*<div id="search">
-				@using (Html.BeginForm("Index", "Search", method: FormMethod.Get, routeValues: new { area = string.Empty })) {
-					@Html.Hidden("Page", Html.ViewContext.RequestContext.HttpContext.Request.QueryString["Page"]);
-					@Html.TextBox("Query", Html.ViewContext.RequestContext.HttpContext.Request.QueryString["Query"]);
-					<input type="submit" value="Search" />
-				} 
-			</div>*@
-			<div id="menucontainer">
-			
-				<ul id="menu">              
-					@if (Request.IsAuthenticated) {
-						<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.StaticPageController ? " class=\"selected\"" : string.Empty)>@Html.ActionLink("Static text", "Index", "StaticPage", routeValues: new { area = "Admin" })</li>
-						<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.CommentController ? " class=\"selected\"" : string.Empty)>@Html.ActionLink("Comments", "Index", "Comment", routeValues: new { area = "Admin" })</li>
-						<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.RssFeedController ? " class=\"selected\"" : string.Empty)>@Html.ActionLink("Rss", "Index", "RssFeed", routeValues: new { area = "Admin" })</li>
-					}
-				</ul>
-			</div>
-		</div>
-		<div id="main">
-			<div id="content">
-			@RenderBody()
-			</div>
-			<div id="footer">
-			</div>
+	<div id ="headerwrapper" class ="wrapper">
+		<div id="header" class =" full">
+			<a id ="logo" href ="http://www.startupcamp.sk">Startupcamp.sk</a>
+
+			<span id ="tagline">
+				Pravidelné neformálne stretnutie ľudí zaujímajúcich sa o startupy - founderi, kóderi, dizajnéri, investori aj biznis mudrlanti.		</span>
 		</div>
 	</div>
-		@Html.RenderScripts()
-		@Html.RenderInlineScripts()
+	<div id ="menuwrapper" class ="wrapper">
+		<ul id ="menu" class ="full">
+			<li><a href ="http://www.startupcamp.sk/">Home</a></li>
+			<li><a href ="http://www.startupcamp.sk/startupy/">Startupy</a></li>
+			<li><a href ="http://www.startupcamp.sk/ludia/">Ľudia</a></li>
+			<li class ="active"><a href ="http://jobs.preweb.sk/">Job board</a></li>
+			<li><a href ="http://www.startupcamp.sk/forum/">Forum</a></li>
+			@if (Request.IsAuthenticated) {
+				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.StaticPageController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Static text", "Index", "StaticPage", routeValues: new { area = "Admin" })</li>
+				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.CommentController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Comments", "Index", "Comment", routeValues: new { area = "Admin" })</li>
+				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.RssFeedController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Rss", "Index", "RssFeed", routeValues: new { area = "Admin" })</li>
+			}
+		</ul>
+	</div>
+	<div id ="content" class ="homepage full">
+		@RenderBody()
+	</div>
+	<div id ="footer" class ="full">
+	<a href ="http://www.Startupcamp.sk">Startupcamp</a> | <a href ="https://twitter.com/startupcampSK">twitter</a> | <a href ="http://www.facebook.com/StartupCampSK" target ="_blank">facebook</a> | za Job Portal <a href ="http://vlko.preweb.sk" target ="_blank">vlko</a> | furt tu na tom robíme
+	@Html.RenderScripts()
+	@Html.RenderInlineScripts()
 <script>
 	var _gaq = [['_setAccount', '@vlko.BlogModule.Settings.GAToken.Value'], ['_trackPageview']];
-	(function(d, t) {
+	(function (d, t) {
 		var g = d.createElement(t),
 			s = d.getElementsByTagName(t)[0];
 		g.async = true;
@@ -66,5 +63,7 @@
 		s.parentNode.insertBefore(g, s);
 	})(document, 'script');
 </script>
+	</div>
+
 </body>
 </html>

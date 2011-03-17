@@ -23,8 +23,12 @@ namespace vlko.web.Controllers
 		{
 			return View(new HomeViewModel
 			                    	{
-										People = RepositoryFactory.Action<JobAction>().GetPeople().ToPage(0, 20),
-										Projects = RepositoryFactory.Action<JobAction>().GetProjects().ToPage(0, 20),
+										People = RepositoryFactory.Action<JobAction>()
+											.GetPeople().OrderByDescending(item => item.CreateDate)
+											.ToPage(0, 20),
+										Projects = RepositoryFactory.Action<JobAction>()
+											.GetProjects().OrderByDescending(item => item.CreateDate)
+											.ToPage(0, 20),
 			                    	});
 		}
 	}

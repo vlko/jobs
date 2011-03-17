@@ -6,13 +6,10 @@
 	Html.ScriptInclude("~/Scripts/jquery.validate.js");
 	Html.ScriptInclude("~/Scripts/jquery.validate.unobtrusive.js");
 }
-
-<h2>Nový projekt</h2>
-
 @using (Html.BeginForm()) {
 	@Html.ValidationSummary(excludePropertyErrors:true)
 	<fieldset>
-		<legend>Údaje</legend>
+		<legend>Nový projekt</legend>
 
 			@Html.EditorFor(model => model.Title)
 			@Html.EditorFor(model => model.Email)
@@ -44,6 +41,12 @@
 						<td colspan="3"><input type="submit" id="add_property" name="AddProperty" value="Nová" /></td>
 					</tr>
 				</table>
+				<span class="editor-hint">Hints:
+					<ul>
+						<li><i>Ak hodnota vlastnosti začína na http:// alebo https:// bude detekovaná ako linka</i></li>
+						<li><i>Ak hodnota vlastnosti začína na @@ bude detekovaná ako twitter linka</i></li>
+					</ul>
+				</span>
 			</div>
 
 			@Html.EditorFor(model => model.Description)
@@ -53,7 +56,7 @@
 	</fieldset>
 }
 <div class="ajax_ignore">
-	@Html.ActionLink("Späť na zoznam projektov", "Index") 
+	@Html.ActionLink("Späť na zoznam projektov", "Index") 
 </div>
 
 @{ Html.ScriptInlineInclude(

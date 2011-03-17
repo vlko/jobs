@@ -1,86 +1,59 @@
-﻿/* html5doctor.com Reset Stylesheetv1.6.1Last Updated: 2010-09-17Author: Richard Clark - http://richclarkdesign.com Twitter: @rich_clark*/
-html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,del, dfn, em, img, ins, kbd, q, samp,small, strong, sub, sup, var,b, i,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary,time, mark, audio, video {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}body {line-height:1;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block;}nav ul {list-style:none;}blockquote, q {quotes:none;}blockquote:before, blockquote:after,q:before, q:after {content:'';content:none;}a {margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;}
-/* change colours to suit your needs */ins {background-color:#ff9;color:#000;text-decoration:none;}
-/* change colours to suit your needs */mark {background-color:#ff9;color:#000; font-style:italic;font-weight:bold;}del {text-decoration: line-through;}abbr[title], dfn[title] {border-bottom:1px dotted;cursor:help;}table {border-collapse:collapse;border-spacing:0;}
-/* change border colour to suit your needs */hr {display:block;height:1px;border:0;   border-top:1px solid #cccccc;margin:1em 0;padding:0;}input, select {vertical-align:middle;}
-body
-{
-	background-color: #eaf2fd;
-	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0;
-	padding: 0;
-	color: black;
-}
-input {
-	font-size: 16px;
+﻿.pager .ui-button {
+	margin-right: -5px;
 }
 
-a
-{
-	color: #1ba1e2;
-	text-decoration: underline;
+.pager a:hover.ui-button {
+	color: Black !important;
 }
-a:visited
-{
-	color: #1ba1e2;
+.grid_create {
+	float:right;
 }
-a:hover
-{
-	color: #309b46;
-	text-decoration: none;
+.go_to {
+	clear:both;
+	float:right;
 }
-a:active
-{
-	color: #8cbf26;
+.job a.contact_me {
+	padding-left: 45px;
+	background: transparent url("/Content/images/mail.png") no-repeat left top;
+	line-height: 27px;
 }
 
-p, ul
-{
-	margin-bottom: 20px;
-	line-height: 1.6em;
+.job {
+	background-color: #f5f5f5;
+	margin-top: 1em;
+	display:block;
 }
-
-/* HEADINGS   
-----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6
-{
-	font-weight: normal;	
-	font-size: 2em;
-	margin-bottom: 0.8em;
+.job .pad-right {
+	padding-left: 25px;
 }
-
-h1
-{
-	font-size: 2.2em;
-	padding-bottom: 0;
-	margin-bottom: 0;
+.job h2 {
+	font-size:1.5em;
 }
-h2
-{
-	padding: 0 0 10px 0;
-	line-height: 2em;
+.job section, .job header, .job footer {
+	padding: 0px 10px;
+	display:block;
 }
-h3
-{
-	font-size: 1.5em;
+.job header {
+	padding-top: 5px;
 }
-h4
-{
-	font-size: 1.3em;
+.job footer {
+	clear:both;
+	font-weight: bold;
+	background-color: #ebebeb;
+	padding: 3px 10px;
 }
-h5, h6
-{
-	font-size: 1.1em;
+.job .grid_details {
+	float:right;
 }
-
-/* this rule styles <h2> tags that are the 
-first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
-{
-	margin-top: 0;
+.job .place {
+	float:right;
 }
-
+.job .desc {
+	overflow: hidden;
+	_height: 4.2em;
+	max-height: 4.2em;
+	margin-bottom: 3px;
+}
 .f_right {
 	float: right;
 }
@@ -91,59 +64,6 @@ first child of the left and right table columns */
 
 .cleaner {
 	clear: both;
-}
-/* PRIMARY LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-/* you can specify a greater or lesser percentage for the 
-page width. Or, you can specify an exact pixel width. */
-.page {
-	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#header {
-	position: relative;
-	margin: 0;
-	margin-top: 5px;
-	padding: 0;
-	height: 128px;
-	color: White;
-	background-color: #1ba1e2;
-}
-
-#header h1 {
-	padding: 5px 0 0 140px;
-	margin: 0;
-	border: none;
-	font-size: 25px;
-	font-weight: bold;
-}
-#title .name {
-	font-size: 40px;
-}
-
-#logo {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-#main {
-	padding: 30px 30px 15px 30px;
-	background-color: #fff;
-	margin-bottom: 30px;
-	line-height: 1.25em;
-	_height: 1px; /* only IE6 applies CSS properties starting with an underscore */
-}
-
-#footer {
-	padding: 10px 0;
-	text-align: center;
-	line-height: normal;
-	margin: 0;
-	font-size: .9em;
 }
 
 #search {
@@ -183,153 +103,17 @@ page width. Or, you can specify an exact pixel width. */
 }
 
 #people, #projects {
-			margin-right: 5px;
+			margin: 0 20px 0 10px;
 			float: left;
-			width: 440px;
+			width: 445px;
 		}
-/* specific  
-----------------------------------------------------------*/
-
-#timeline, .note-main {
-	padding-left: 70px;
-	line-height: 30px;
-	height: 60px;
-	margin-bottom: 1em;
-}
-#timeline {
-	background: transparent url("/Content/images/timeline.gif") no-repeat left top;
-}
-.note-main{
-	background: transparent url("/Content/images/note-main.gif") no-repeat left top;
-}
-.twitter_status, .rss_item, .note, .one-note, .comment {
-	position: relative;
-	padding: 2px 2px 2px 40px;
-	margin-bottom: 2em;
-	min-height: 30px;
-}
-.twitter_status:hover, .rss_item:hover, .note:hover, .comment:hover {
-	background-color: #eaf2fd;
-}
-.rss_item .icon-link, .note .icon-link, .twitter_status .icon-link, .comment .icon-link {
-	position: absolute;
-	left: 2px;
-	top: 2px;
-}
-.rss_item .title, .note .title, .twitter_status .title, .comment .title {
-	margin-bottom: 0.3em;
-}
-.rss_item .text, .note .text, .twitter_status .text, .one-note .text, .comment .text, .content-text {
-	margin-right: 200px;
-	overflow-x: auto;
-}
-.rss_item .date, .twitter_status .date, .note .date {
-	float:right;
-	background: #1ba1e2 url("/Content/images/change.gif") no-repeat right top;
-	padding: 0px 25px 0px 5px;
-	line-height: 20px;
-	color: White;
-}
-.note .comments, .comments {
-	background: #1ba1e2 url("/Content/images/comments.gif") no-repeat right top;
-}
-.author {
-	background: #1ba1e2 url("/Content/images/author.gif") no-repeat right top;
-}
-.publish-date {
-	background: #1ba1e2 url("/Content/images/publish.gif") no-repeat right top;
-}
-.last-change-date {
-	background: #1ba1e2 url("/Content/images/change.gif") no-repeat right top;
-}
-.note .comments, .comments, .author, .publish-date, .last-change-date {
-	clear:both;
-	float:right;
-	padding: 0px 25px 0px 5px;
-	line-height: 20px;
-	color: White;
-}
-.comment-sort img {
-	border: 1px solid White; 
-}
-.comment-sort img:hover {
-	border: 1px solid #309b46; 
-}
-.one-note {
-	position: relative;
-	padding: 2px 0px;
-	min-height: 30px;
-}
-.one-note .info, .comment-sort {
-	%width: 250px;
-	float: right;
-	text-align:right;
-	padding: 3px 0px;
-}
-
-/* TAB MENU   
-----------------------------------------------------------*/
-#menucontainer {
-	position: absolute;
-	bottom: 0;
-	left: 140px;
-}
-
-ul#menu {
-	padding: 0;
-	position: relative;
-	margin: 0;
-	float: left;	
-}
-
-ul#menu li {
-	display: inline;
-	list-style: none;
-}
-
-ul#menu li#greeting {
-	padding: 0 20px;
-	font-weight: bold;
-	text-decoration: none;
-	line-height: 30px;
-}
-
-ul#menu li a {
-	padding: 5px 10px 5px 10px;
-	font-size: 20px;
-	text-decoration: none;
-	line-height: 30px;
-	color: White;
-}
-
-ul#menu li a:hover {
-	background-color: #309b46;
-	text-decoration: none;
-}
-
-ul#menu li a:active {
-	background-color: #8cbf26;
-	text-decoration: none;
-}
-
-ul#menu li.selected a {
-	background-color: #309b46;
-}
-
-div#title {
-	display:block;
-	float:left;
-	text-align:left;
-}
-
-
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
 fieldset {
 	margin: 0.2em 0;
 	padding: 0.2em 0.5em 0.5em 0.5em;
-	border: 1px solid #CCC;
+	border: 1px solid #666;
 }
 
 fieldset p {
@@ -344,37 +128,41 @@ legend {
 
 input[type="text"] {
 	width: 200px;
-	border: 1px solid #CCC;
+	border: 1px solid #666;
 }
 
 input[type="password"] {
 	width: 200px;
-	border: 1px solid #CCC;
+	border: 1px solid #666;
 }
 
 /* TABLE
 ----------------------------------------------------------*/
 
 table {
-  border: solid 1px #1ba1e2;
+  width: 100%;
+  border: 0;
   border-collapse: collapse;
 }
 
 table td {
   padding: 5px;   
-  border: solid 1px #e8eef4;
+  border: 0;
 }
 
 table th {
   padding: 6px 5px;
   text-align: left;
   color: White;
-  background-color: #1ba1e2; 
-  border: solid 1px #1ba1e2;   
+  background-color: #666666; 
+  border: solid 1px #666666;   
 }
 table .no_wrap {
 	white-space: nowrap;
 }
+
+table tr:nth-child(even) {background: #f7f7f7}
+table tr:hover { background-color: #e4f3e1; }
 /* MISC  
 ----------------------------------------------------------*/
 .error {
@@ -415,6 +203,7 @@ table .no_wrap {
 .display-field,
 .editor-field {
 	margin: 10px 0 0 0;
+	padding: 0;
 }
 
 .display-label, .editor-label {
@@ -428,18 +217,24 @@ table .no_wrap {
 .display-field,
 .editor-field {
 	float: left;
-	width: 556px;
-	border-left: 2px solid #1ba1e2;
-	padding: 10px 2em 0px 1em;
+	width: 620px;
+	border-left: 2px solid #09963b;
+	padding: 10px 2em 3px 1em;
+	min-height: 1.5em;
 	margin: 0;
 	position: relative;	
 }
+.editor-field .editor-hint {
+	display: block;
+	font-style: italic;
+}
 .editor-submit {
 	float: left;
-	width: 556px;	
-	border-left: 2px solid #1ba1e;
+	width: 620px;	
+	border-left: 2px solid #09963b;
 	padding: 10px 2em;
 	margin: 0;
+	margin-top: 1px;
 	clear: none;
 }
 .editor-submit input {

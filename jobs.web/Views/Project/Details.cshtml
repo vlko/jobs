@@ -16,31 +16,30 @@
 	};
 }
 <div id="detail">
-<h2>Detaily projektu</h2>
-	<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Contact(Model.SimpleId), "Kontaktujte ma", new { @class = "contact_me", title = "Kontaktujte ma" }))</h3>
-	<fieldset>
-		<legend>@Model.Title</legend>
-
+<article class="job">
+		<header>
+		
+		<h1 class="pad-right">@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(Model.SimpleId), Model.Title))</h1>
+		<h2>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Contact(Model.SimpleId), "Kontaktujte ma", new { @class = "contact_me f_right", title = "Kontaktujte ma" }))</h2>
+		</header>
+		<section>
 		<div class="display-label">Miesto</div>
 		<div class="display-field">@Model.Place</div>
 
 		<div class="display-label">Technológie</div>
 		<div class="display-field">@Model.Prerequirements</div>
-
 		@foreach (var property in Model.Properties)
 	 {
 			<div class="display-label">@property.Key</div>
 			<div class="display-field">@formatProperty(property.Value)</div>
 	 }
-
 		<div class="display-label">Popis</div>
 		<div class="display-field">@Html.LineBreaksToBr(Model.Description)</div>
-
-		<div class="display-label">Vytvorené</div>
-		<div class="display-field">@String.Format("{0:g}", Model.CreateDate)</div>
-	</fieldset>
+		</section>
+		<footer><b>Vytvorené: </b>@String.Format("{0:g}", Model.CreateDate)</footer>
+	</article>
 	<div class="ajax_ignore">
-		@Html.ActionLink("Späť na zoznam projektov", "Index") 
+		@Html.ActionLink("Späť na zoznam projektov", "Index") 
 	</div>
 </div>
 @{ Html.ScriptInlineInclude(

@@ -4,31 +4,45 @@
 	ViewBag.Title = "Home Page";
 	Html.ScriptInclude("~/Scripts/Grid.js");
 }
-<section id="people">
+<section id="people" class="eventposts">
 	<h2>Záujemci</h2>
-	<h3>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Create(), "Nový záujemca", new { @class = "grid_create" }))</h3>
+	@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Create(), "Nový záujemca", new { @class = "grid_create" }))
+	<div class="cleaner"></div>
 	@foreach (var offer in Model.People)
-	 {
-		<article>
-			<h3>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(offer.SimpleId), offer.Title, new { @class = "grid_details" }))</h3>
-			<div class="place">@offer.Place</div>
-			<div class="skill">@offer.Prerequirements</div>
+ {
+		<article class="job">
+			<header>
+			@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(offer.SimpleId), "Detail", new { @class = "grid_details" }))
+			<h1>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(offer.SimpleId), offer.Title))</h1>
+			</header>
+			<section>
+			<div class="place"><b>kde:</b> @offer.Place</div>
+			<div class="desc">@Html.LineBreaksToBr(offer.Description)</div>
+			</section>
+			<footer><div class="skill">@offer.Prerequirements</div></footer>
 		</article>	 
-	 }
-	 @(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Index(null), "Zoznam všetkých záujemcov"))
+ }
+	 @(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Index(null), "Zoznam záujemcov", new { @class = "go_to" }))
 </section>
-<section id="projects">
+<section id="projects" class="eventposts">
 	<h2>Projekty</h2>
-	<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Create(), "Nový projekt", new { @class = "grid_create" }))</h3>
+	@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Create(), "Nový projekt", new { @class = "grid_create" }))
+	<div class="cleaner"></div>
 	@foreach (var offer in Model.Projects)
-	 {
-		<article>
-			<h3>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(offer.SimpleId), offer.Title, new { @class = "grid_details" }))</h3>
-			<div class="place">@offer.Place</div>
-			<div class="technology">@offer.Prerequirements</div>
-		</article>	 
-	 }
-	 @(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Index(null), "Zoznam všetkých projektov"))
+ {
+	 <article class="job">
+			<header>
+			@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(offer.SimpleId), "Detail", new { @class = "grid_details" }))
+			<h1>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(offer.SimpleId), offer.Title))</h1>
+			</header>
+			<section>
+			<div class="place"><b>kde:</b> @offer.Place</div>
+			<div class="desc">@Html.LineBreaksToBr(offer.Description)</div>
+			</section>
+			<footer><div class="skill">@offer.Prerequirements</div></footer>
+		</article>	 	 
+ }
+	 @(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Index(null), "Zoznam projektov", new { @class = "go_to" }))
 </section>
 <div class="cleaner"></div>
 @{ Html.ScriptInlineInclude(

@@ -170,6 +170,12 @@
 					error: ajaxException
 				});
 				return false;
+			})
+			.button({
+				icons: {
+					primary: 'ui-icon-plusthick'
+				},
+				text: true
 			});
 
 		});

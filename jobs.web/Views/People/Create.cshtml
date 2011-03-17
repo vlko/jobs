@@ -7,18 +7,16 @@
 	Html.ScriptInclude("~/Scripts/jquery.validate.unobtrusive.js");
 }
 
-<h2>Nový záujemca</h2>
-
 @using (Html.BeginForm()) {
 	@Html.ValidationSummary(excludePropertyErrors:true)
 	<fieldset>
-		<legend>Údaje</legend>
+		<legend>Nový záujemca</legend>
 
 			@Html.EditorFor(model => model.Title)
 			@Html.EditorFor(model => model.Email)
 			@Html.EditorFor(model => model.Place)
 			<div class="editor-label">
-				<label for="@Html.NameFor(model => model.Prerequirements)">Skúsenosti</label>
+				<label for="@Html.NameFor(model => model.Prerequirements)">Skills</label>
 			</div>
 			<div class="editor-field">
 				@Html.TextBoxFor(model => model.Prerequirements, cssClass: "text-box single-line", maxLength: Html.MaxLength(model => model.Prerequirements))
@@ -44,6 +42,12 @@
 						<td colspan="3"><input type="submit" id="add_property" name="AddProperty" value="Nová" /></td>
 					</tr>
 				</table>
+				<span class="editor-hint">Hints:
+					<ul>
+						<li><i>Ak hodnota vlastnosti začína na http:// alebo https:// bude detekovaná ako linka</i></li>
+						<li><i>Ak hodnota vlastnosti začína na @@ bude detekovaná ako twitter linka</i></li>
+					</ul>
+				</span>
 			</div>
 
 			@Html.EditorFor(model => model.Description)
@@ -53,7 +57,7 @@
 	</fieldset>
 }
 <div class="ajax_ignore">
-	@Html.ActionLink("Späť na zoznam záujemcov", "Index") 
+	@Html.ActionLink("Späť na zoznam záujemcov", "Index") 
 </div>
 
 @{ Html.ScriptInlineInclude(

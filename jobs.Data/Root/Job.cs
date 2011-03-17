@@ -45,7 +45,7 @@ namespace Jobs.Data.Root
 		/// Gets or sets the title.
 		/// </summary>
 		/// <value>The title.</value>
-		[Display(Name = "Nadpis")]
+		[Display(Name = "Titulka", Description="Bude použitá ako text linky, vyberajte preto starostlivo.")]
 		[Required(ErrorMessage = "Nutné zadať")]
 		[StringLength(80, ErrorMessage = "Maximálna dĺžka je 80 znakov")]
 		public string Title { get; set; }
@@ -54,7 +54,7 @@ namespace Jobs.Data.Root
 		/// Gets or sets the email.
 		/// </summary>
 		/// <value>The email.</value>
-		[Display(Name = "Email")]
+		[Display(Name = "Email", Description = "Email nie je zverejnený, je použitý na overenie a zasielanie kontaktov priamo z tejto stránky.")]
 		[Required(ErrorMessage = "Nutné zadať")]
 		[EmailAddress(ErrorMessage = "Zadajte platný email")]
 		[StringLength(80, ErrorMessage = "Maximálna dĺžka je 80 znakov")]
