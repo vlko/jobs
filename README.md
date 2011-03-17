@@ -1,7 +1,7 @@
-vlko framework 
+jobs.preweb.sk
 ====================
 
-vlko framework is there to simplify development under asp.net mvc.
+Jobs su postavene na dobrom zaklade z http://github.com/vlko/vlko, inak ako sa pise nizsie vsetky znalosti a vedomosti mozte vyuzivat podla svojej vole.
 
 ##Opensource License.
 
