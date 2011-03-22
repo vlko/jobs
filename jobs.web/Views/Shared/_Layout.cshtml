@@ -40,9 +40,7 @@
 			<li class ="active"><a href ="http://jobs.preweb.sk/">Job board</a></li>
 			<li><a href ="http://www.startupcamp.sk/forum/">Forum</a></li>
 			@if (Request.IsAuthenticated) {
-				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.StaticPageController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Static text", "Index", "StaticPage", routeValues: new { area = "Admin" })</li>
-				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.CommentController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Comments", "Index", "Comment", routeValues: new { area = "Admin" })</li>
-				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.RssFeedController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("Rss", "Index", "RssFeed", routeValues: new { area = "Admin" })</li>
+				<li@Html.Raw(ViewContext.Controller is vlko.web.Areas.Admin.Controllers.JobsController ? " class=\"active\"" : string.Empty)>@Html.ActionLink("All jobs", "Index", "Jobs", routeValues: new { area = "Admin" })</li>
 			}
 		</ul>
 	</div>

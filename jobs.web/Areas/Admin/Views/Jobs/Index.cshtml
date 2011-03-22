@@ -1,0 +1,52 @@
+﻿@model PagedModel<Jobs.Data.Root.Job>
+@using vlko.core.Components;
+@{
+	ViewBag.Title = "Job lists";
+
+	Html.ScriptInclude("~/Scripts/Grid.js");
+}
+
+<h2>Index</h2>
+
+<table>
+	<tr>
+		<th></th>
+		<th>Typ</th>
+		<th>Titulka</th>
+		<th>Email</th>
+		<th>Miesto</th>
+		<th>Skills/Technologie</th>
+		<th>Vytvorené</th>
+		<th>Aktivačná linka</th>
+	</tr>
+
+@foreach (var item in Model)
+{
+	<tr>
+		<td>@(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Details(item.SimpleId), "Details", new { @class = "grid_details", title = "Details" }))</td>
+		<td>@item.JobType</td>
+		<td>@item.Title</td>
+		<td>@item.Email</td>
+		<td>@item.Place</td>
+		<td>@item.Prerequirements</td>
+		<td>@String.Format("{0:g}", item.CreateDate)</td>
+		@{
+			var validationLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/Project/Confirm/" + item.ActivationToken;
+		}
+		<td>@if (item.ActivationToken != null)
+	  { @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Activate(item.ActivationToken), "Aktivovať")) }
+	  else
+	  { @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Deactivate(item.SimpleId), "Deaktivovať")) }</td>
+	</tr>
+}
+
+</table>
+<div>@Html.Partial("~/Views/Shared/Pager.cshtml", new PagerModel(Model, "Index"))</div>
+@{ Html.ScriptInlineInclude(
+@<script type="text/javascript">
+	$(function () {
+		$("#content").ajaxGrid();
+	});
+</script>);
+}	
+

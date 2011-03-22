@@ -36,6 +36,19 @@ namespace Jobs.Data.Action
 		}
 
 		/// <summary>
+		/// Gets all jobs.
+		/// </summary>
+		/// <returns>Query result.</returns>
+		public IQueryResult<Job> GetAll()
+		{
+			return new ProjectionAsQueryResult<Job, Job>(
+				SessionFactory<Job>.IndexQuery<JobSortIndex>())
+				.AddSortMapping(job => job.CreateDate, job => job.CreateDate)
+				.AddSortMapping(job => job.Title, job => job.Title)
+				.AddSortMapping(job => job.Place, job => job.Place);
+		}
+
+		/// <summary>
 		/// Loads the specified id.
 		/// </summary>
 		/// <param name="id">The id.</param>
@@ -61,7 +74,7 @@ namespace Jobs.Data.Action
 		/// Confirms the specified token.
 		/// </summary>
 		/// <param name="token">The token.</param>
-		/// <returns></returns>
+		/// <returns>True if success.</returns>
 		public bool Confirm(string token)
 		{
 			var jobToConfirm = SessionFactory<Job>.IndexQuery<JobSortIndex>().Where(job => job.ActivationToken == token).FirstOrDefault();
@@ -69,6 +82,23 @@ namespace Jobs.Data.Action
 			{
 				jobToConfirm.ActivationToken = null;
 				SessionFactory<Job>.Store(jobToConfirm);
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Deactivates the specified id.
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns>True if success.</returns>
+		public bool Deactivate(string id)
+		{
+			var jobToDeactivate = SessionFactory<Job>.Load(id);
+			if (jobToDeactivate != null)
+			{
+				jobToDeactivate.ActivationToken = Guid.NewGuid().ToString();
+				SessionFactory<Job>.Store(jobToDeactivate);
 				return true;
 			}
 			return false;

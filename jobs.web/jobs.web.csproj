@@ -28,6 +28,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PublishDatabases>false</PublishDatabases>
+    <ExcludeApp_Data>false</ExcludeApp_Data>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -90,7 +92,7 @@
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\_dependencies\mvc\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\_dependencies\RavenDB.EmbeddedClient\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.0.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
@@ -178,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\JobsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RssFeedController.cs" />
     <Compile Include="Areas\Admin\Controllers\TwitterController.cs" />
     <Compile Include="Areas\Admin\ViewModel\RssFeed\RssFeedTestResult.cs" />
@@ -587,6 +590,8 @@
     <Content Include="Areas\Admin\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Jobs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Jobs\Details.cshtml" />
     <None Include="CodeTemplates\AddView\PagedList.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PagedList.cs</LastGenOutput>

@@ -1,0 +1,14 @@
+﻿@model Jobs.Data.Root.Job
+
+@{
+	ViewBag.Title = "Details";
+}
+@if (Model.JobType == Jobs.Data.Root.JobTypeEnum.People)
+{
+	@Html.Partial("~/Views/People/Details.cshtml", Model) 
+}
+else 
+{ 
+	@Html.Partial("~/Views/Project/Details.cshtml", Model) 
+}
+
