@@ -104,5 +104,19 @@ namespace Jobs.Data.Root
 		/// <value>The activation token.</value>
 		public string ActivationToken { get; set; }
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is closed.
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this instance is closed; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsClosed { get; set; }
+
+		/// <summary>
+		/// Gets or sets the close token.
+		/// </summary>
+		/// <value>The close token.</value>
+		public string CloseToken { get; set; }
+
 	}
 }

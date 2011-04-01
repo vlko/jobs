@@ -80,5 +80,35 @@ namespace vlko.web.Areas.Admin.Controllers
 			}
 			return new HttpNotFoundResult();
 		}
+
+		/// <summary>
+		/// URL: /Jobs/GenerateCloseToken
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns>Action result.</returns>
+		public ActionResult GenerateCloseToken(string id)
+		{
+			using (var tran = RepositoryFactory.StartTransaction())
+			{
+				RepositoryFactory.Action<JobAction>().GenerateCloseToken("jobs/" + id);
+				tran.Commit();
+			}
+			return RedirectToAction("Index");
+		}
+
+		/// <summary>
+		/// URL: /Jobs/OpenJob
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns>Action result.</returns>
+		public ActionResult OpenJob(string id)
+		{
+			using (var tran = RepositoryFactory.StartTransaction())
+			{
+				RepositoryFactory.Action<JobAction>().OpenJob("jobs/" + id);
+				tran.Commit();
+			}
+			return RedirectToAction("Index");
+		}
 	}
 }

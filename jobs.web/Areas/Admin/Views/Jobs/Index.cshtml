@@ -18,6 +18,7 @@
 		<th>Skills/Technologie</th>
 		<th>Vytvorené</th>
 		<th>Aktivačná linka</th>
+		<th>Close linka</th>
 	</tr>
 
 @foreach (var item in Model)
@@ -34,9 +35,17 @@
 			var validationLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/Project/Confirm/" + item.ActivationToken;
 		}
 		<td>@if (item.ActivationToken != null)
-	  { @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Activate(item.ActivationToken), "Aktivovať")) }
-	  else
-	  { @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Deactivate(item.SimpleId), "Deaktivovať")) }</td>
+		{ @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Activate(item.ActivationToken), "Aktivovať")) }
+		else
+		{ @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.Deactivate(item.SimpleId), "Deaktivovať")) }</td>
+		<td>@if (string.IsNullOrEmpty(item.CloseToken))
+		{ @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.GenerateCloseToken(item.SimpleId), "Vytvor close token")) }
+		else if (item.IsClosed)
+		{ @(Html.ActionLink<vlko.web.Areas.Admin.Controllers.JobsController>(c => c.OpenJob(item.SimpleId), "Otvoriť")) }
+		else if (item.JobType == Jobs.Data.Root.JobTypeEnum.People)
+		{ @(Html.ActionLink("Uzavrieť", "Close", "People", routeValues: new { id = item.CloseToken, area = string.Empty })) }
+		else
+		{ @(Html.ActionLink("Uzavrieť", "Close", "Project", routeValues: new { id = item.CloseToken, area = string.Empty })) }</td>
 	</tr>
 }
 

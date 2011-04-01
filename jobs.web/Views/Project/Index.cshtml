@@ -23,6 +23,9 @@
 			Technológie
 		</th>
 		<th>
+			Stav
+		</th>
+		<th>
 			Pridané
 		</th>
 	</tr>
@@ -35,6 +38,7 @@
 		<td>@item.Title</td>
 		<td>@item.Place</td>
 		<td>@item.Prerequirements</td>
+		<td>@(item.IsClosed ? "Ukončená" : "Otvorená")</td>
 		<td>@String.Format("{0:g}", item.CreateDate)</td>
 	</tr>
 }

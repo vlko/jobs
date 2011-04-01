@@ -1,7 +1,7 @@
 ﻿@model Jobs.Data.Root.Job
 
 @{
-	ViewBag.Title = "Details";
+	ViewBag.Title = "Ukončiť ponuku?";
 	Func<string, object> formatProperty = (value) =>
 	{
 		if (value.StartsWith("http://") || value.StartsWith("https://"))
@@ -16,15 +16,15 @@
 	};
 }
 <div id="detail">
-	
+	<h2>Skutočne si prajete ukončiť ponuku?</h2>
+	@using (Html.BeginForm())
+	 {
+		<input name="Id" type="hidden" value="@Model.Id" />
+		@Html.SubmitButton("Close", "Áno, označ ako ukončenú", new { @class = "ui-button ui-widget ui-state-default ui-corner-all" })
+	 }
 	<article class="job">
 		<header>
-		
-		<h1 class="pad-right">@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(Model.SimpleId), Model.Title))</h1>
-		<h2>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Contact(Model.SimpleId), "Kontaktujte ma", new { @class = "contact_me f_right", title = "Kontaktujte ma" }))</h2>
-		@if (Model.IsClosed) {
-			<h2><span class="f_right cleaner">Ponuka ukončená!</span></h2>
-		}
+		<h2 class="pad-right">@Model.Title</h2>
 		</header>
 		<section>
 		<div class="display-label">Miesto</div>
@@ -42,30 +42,5 @@
 		</section>
 		<footer><b>Vytvorené: </b>@String.Format("{0:g}", Model.CreateDate)</footer>
 	</article>
-	<div class="ajax_ignore">
-		@Html.ActionLink("Späť na zoznam záujemcov", "Index") 
-	</div>
 </div>
-@{ Html.ScriptInlineInclude(
-@<script type="text/javascript">
-	$(function () {
-		$(".contact_me")
-				.click(function (event) {
-					event.preventDefault();
-					createLoading();
-					$.ajax({
-						url: $(this).attr("href") + "?ajaxTime=" + new Date().getTime(),
-						success: function (data) {
-							var content = $("#detail");
-							fillContentWithData(content, data);
-							closeLoading();
-							updateEffect(content);
-						},
-						error: ajaxException
-					});
-				});
-
-	});
-</script>);
-} 
 

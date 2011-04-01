@@ -644,6 +644,10 @@
     <Content Include="Views\People\Index.cshtml" />
     <Content Include="Views\People\SendFail.cshtml" />
     <Content Include="Views\People\SendOk.cshtml" />
+    <Content Include="Views\People\Close.cshtml" />
+    <Content Include="Views\People\CloseOk.cshtml" />
+    <Content Include="Views\Project\Close.cshtml" />
+    <Content Include="Views\Project\CloseOk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

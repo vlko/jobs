@@ -64,6 +64,42 @@ namespace jobs.web.Controllers
 		}
 
 		/// <summary>
+		/// URL: /People/Close
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns>Action result.</returns>
+		public ActionResult Close(string id)
+		{
+			var job = RepositoryFactory.Action<JobAction>().GetJobByCloseToken(id);
+			if (job != null)
+			{
+				return View(job);
+			}
+			return new HttpNotFoundResult();
+		}
+
+		/// <summary>
+		/// URL: /People/Close [post]
+		/// </summary>
+		/// <param name="job">The job.</param>
+		/// <returns>Action result.</returns>
+		[HttpPost]
+		public ActionResult Close(Job job)
+		{
+			bool closed = false;
+			using (var tran = RepositoryFactory.StartTransaction())
+			{
+				closed = RepositoryFactory.Action<JobAction>().CloseJob(job.Id);
+				tran.Commit();
+			}
+			if (closed)
+			{
+				return View("CloseOk");
+			}
+			return new HttpNotFoundResult();
+		}
+
+		/// <summary>
 		/// URL: /Project/Contact
 		/// </summary>
 		/// <param name="id">The id.</param>

@@ -17,7 +17,8 @@ namespace Jobs.Data.Index
 										item.Place,
 										item.Prerequirements,
 										item.JobType,
-										item.ActivationToken
+										item.ActivationToken,
+										item.CloseToken
 									};
 		}
 	}

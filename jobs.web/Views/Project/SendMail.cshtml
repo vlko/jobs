@@ -15,10 +15,12 @@
 		return value;
 	};
 	var validationLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/Project/Confirm/" + Model.ActivationToken;
+	var closeLink = vlko.core.InversionOfControl.IoC.Resolve<vlko.core.Services.IAppInfoService>().RootUrl + "/Project/Close/" + Model.CloseToken;
 }
 
 <email>
-Pre zverejnenie ponuky kliknite na nasledujúcu linku  <a href="@validationLink">@validationLink</a>
+Pre zverejnenie ponuky kliknite na nasledujúcu linku  <a href="@validationLink">@validationLink</a><br/><br/>
+Pre ukončenie ponuky si uschovajte nasledujúcu linku  <a href="@closeLink">@closeLink</a><br /> <i>(Pozor ide iba o upozornenie. Kontaktovať vás budú môcť aj naďalej.)</i><br />
 <table>
 	<tr><td colspan="2">Detail ponuky</td></tr>
 	<tr><td>Nadpis</td>

@@ -47,6 +47,10 @@
 }
 .job .place {
 	float:right;
+	text-align:right;
+}
+.job .state {
+	font-weight: bold;
 }
 .job .desc {
 	overflow: hidden;

@@ -16,7 +16,10 @@
 			<h1>@(Html.ActionLink<jobs.web.Controllers.PeopleController>(c => c.Details(offer.SimpleId), offer.Title))</h1>
 			</header>
 			<section>
-			<div class="place"><b>kde:</b> @offer.Place</div>
+			
+			<div class="place">@if (offer.IsClosed) {
+				<div class="state">Ukončená</div>
+			}<b>kde:</b> @offer.Place</div>
 			<div class="desc">@Html.LineBreaksToBr(offer.Description)</div>
 			</section>
 			<footer><div class="skill">@offer.Prerequirements</div></footer>
@@ -36,7 +39,9 @@
 			<h1>@(Html.ActionLink<jobs.web.Controllers.ProjectController>(c => c.Details(offer.SimpleId), offer.Title))</h1>
 			</header>
 			<section>
-			<div class="place"><b>kde:</b> @offer.Place</div>
+			<div class="place">@if (offer.IsClosed) {
+				<div class="state">Ukončená</div>
+			}<b>kde:</b> @offer.Place</div>
 			<div class="desc">@Html.LineBreaksToBr(offer.Description)</div>
 			</section>
 			<footer><div class="skill">@offer.Prerequirements</div></footer>

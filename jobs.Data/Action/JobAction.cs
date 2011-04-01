@@ -67,7 +67,65 @@ namespace Jobs.Data.Action
 			job.Id = SessionFactory<Job>.GenerateId(job);
 			job.CreateDate = DateTime.Now;
 			job.ActivationToken = Guid.NewGuid().ToString();
+			job.CloseToken = Guid.NewGuid().ToString("N").Substring(1, 10) + Guid.NewGuid().ToString();
 			SessionFactory<Job>.Store(job);
+		}
+
+		/// <summary>
+		/// Generates the close token.
+		/// </summary>
+		/// <param name="id">The id.</param>
+		public void GenerateCloseToken(string id)
+		{
+			var job = SessionFactory<Job>.Load(id);
+			if (job != null)
+			{
+				job.CloseToken = Guid.NewGuid().ToString("N").Substring(1, 10) + Guid.NewGuid().ToString();
+				SessionFactory<Job>.Store(job);
+			}
+		}
+
+		/// <summary>
+		/// Opens the job.
+		/// </summary>
+		/// <param name="id">The id.</param>
+		public bool OpenJob(string id)
+		{
+			var job = SessionFactory<Job>.Load(id, false);
+			if (job != null)
+			{
+				job.IsClosed = false;
+				SessionFactory<Job>.Store(job);
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Closes the job.
+		/// </summary>
+		/// <param name="id">The id.</param>
+		/// <returns></returns>
+		public bool CloseJob(string id)
+		{
+			var job = SessionFactory<Job>.Load(id, false);
+			if (job != null)
+			{
+				job.IsClosed = true;
+				SessionFactory<Job>.Store(job);
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Gets the job by close token.
+		/// </summary>
+		/// <param name="token">The token.</param>
+		/// <returns>Job if found, otherwise null.</returns>
+		public Job GetJobByCloseToken(string token)
+		{
+			return SessionFactory<Job>.IndexQuery<JobSortIndex>().Where(job => job.CloseToken == token).FirstOrDefault();
 		}
 
 		/// <summary>
